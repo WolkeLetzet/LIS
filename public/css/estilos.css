@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'PT Serif';
+    src: url('fonts/PTSerif-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+h3 , h4{
+    font-family:'PT Serif';
+    font-weight: bold;
+}
+
+.container.border {
+  background-color: white;
+}
+main{
+    background-color: aliceblue;
+}
+
+html {
+    background-color: aliceblue;
+}
+.nav-item.nav-link{
+    color: white;
+}
+
+a#edit-roles{
+    color: rgba(0, 0, 0, 0.671);
+ }
+ a#edit-roles:hover{
+   color: rgba(0, 0, 0);
+ }
