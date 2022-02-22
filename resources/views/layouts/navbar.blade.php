@@ -64,7 +64,16 @@
                             </div>
 
                         @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" target="_blank"
+                            @hasrole('admin')
+                                href="{{ asset('pdf/LIS-ADMIN Manual.pdf') }}"
+                                @else
+                                href="{{ asset('pdf/LIS-USER Manual.pdf') }}"
+                            @endhasrole
 
+                             >Manual</a>
+                        </li>
 
 
                     </ul>
