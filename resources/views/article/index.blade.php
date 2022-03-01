@@ -1,7 +1,11 @@
 @extends('layouts.navbar')
 
 @section('public')
-
+    <div class="d-flex mb-3 justify-content-end">
+        <div style="max-width: 400px">
+            @include('search')
+        </div>
+    </div>
 
         <div class="row row-cols-lg-1 row-cols-lg-2 row-cols-lg-3 row-cols-lg-4 g-2 g-lg-3 ">
 
@@ -16,7 +20,7 @@
                                 <div class="text-end">
                                     <button type="submit" class="btn-close" aria-label="Close"></button>
                                 </div>
-                                
+
                             </form>
                         </div>
                         @endhasrole

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 
 </head>
-<header>
+<body>
     <nav class="navbar navbar-dark bg-dark fixed-top  ">
         <div class="container-fluid">
 
@@ -42,14 +42,12 @@
                             <a class="nav-link" aria-current="page" href="{{ route('article.index') }}">Home</a>
                         </li>
                         @hasrole('admin')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('article.create') }}">Subir Publicacion</a>
-                            </li>
-                           
-                            <li class="nav-item"><a href="{{ route('user.role.table') }}" class="nav-link">Usuarios</a></li>
-                            <li class="nav-tem"><a href="{{ route('user.create') }}" class="nav-link">Crear Usuario</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('article.create') }}">Subir Publicacion</a></li>
+                            <li class="nav-item"><a href="{{ route('user.cursos')}}" class="nav-link">Usuarios</a></li>
+                            <li class="nav-item"><a href="{{ route('user.create') }}" class="nav-link">Crear Usuario</a></li>
                             <li class="nav-item"><a href="{{ route('user.admin.delete') }}" class="nav-link">Eliminar Usuarios</a></li>
                             <li class="nav-item"><a href="{{ route('youtube.auth')}}" class="nav-link">Youtube Auth</a></li>
+
                         @endhasrole
                         @guest
                         @else
@@ -68,7 +66,7 @@
                             <a class="nav-link" aria-current="page" target="_blank"
                             @hasrole('admin')
                                 href="{{ asset('pdf/LIS-ADMIN Manual.pdf') }}"
-                                @else
+                            @else
                                 href="{{ asset('pdf/LIS-USER Manual.pdf') }}"
                             @endhasrole
 
@@ -84,25 +82,17 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
-            @guest
-            @else
-                <!--- Searchbar --->
-                <form class="d-flex">
-                    <input class="form-control me-2" name='search' type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            @endguest
 
         </div>
     </nav>
-</header>
-
-<body>
 
 
 
 
-    <main class="container-fluid mt-5 pt-5">
+
+
+
+    <main class="container-fluid mt-4 pt-5">
         <!-- Public -->
         @yield('public')
         <!-- User -->

@@ -48,13 +48,17 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () 
 
         Route::get('article/edit/{id}','ArticleController@edit')->name('article.edit');
         Route::post('article/edit/{id}', 'ArticleController@update')->name('article.update');
-        
-        Route::get('user/admin/control','AdminController@userRoleControl')->name('user.role.table');
-        Route::get('user/admin/control/edit','AdminController@userRoleEdit')->name('user.role.control');
-        Route::post('user/admin/control/edit','AdminController@userRoleSave')->name('user.role.save');
+
+        Route::get('user/admin/roles/edit/{id}','AdminController@userRoleEdit')->name('user.roles.edit');
+        Route::post('user/admin/roles/update/{id}','AdminController@userRoleUpdate')->name('user.roles.update');
+
         Route::get('user/admin/control/delete','AdminController@showUserDelete')->name('user.admin.delete');
         Route::post('user/admin/control/delete','AdminController@userDelete')->name('user.admin.delete');
-        
+
+        Route::get('user/admin/cursos','CursoController@index')->name('user.cursos');
+        Route::get('user/admin/cursos/edit/{id}','CursoController@edit')->name('user.cursos.edit');
+        Route::put('user/admin/cursos/update/{id}','CursoController@update')->name('user.cursos.update');
+
 
     });
 });
@@ -70,4 +74,4 @@ Route::get('error',function(){
 })->name('error');
 
 
-Route::view('test','test');
+//Route::get('test','App\Http\Controllers\AdminController@test');

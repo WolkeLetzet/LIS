@@ -16,7 +16,7 @@
                     @endif
                 </div>
                 <div class="col-1">
-                    <a style="font-size: 1.5rem"  id="edit-roles" href="{{ route('user.role.control') }}">
+                    <a style="font-size: 1.5rem"  id="edit-roles" href="{{ route('user.roles.edit') }}">
                         <i class="bi bi-gear-fill"></i>
                     </a>
                 </div>

@@ -54,6 +54,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class, 'user_id', 'id');
     }
+
+    public function cursos(){
+        return $this->belongsToMany(Curso::class,'curso_user','user_id','curso_id');
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));

@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FileFactory extends Factory
+class CursoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,7 @@ class FileFactory extends Factory
     public function definition()
     {
         return [
-            'path'=>'docs/lorem.pdf',
-            'original_name'=>'lorem.pdf'
+            'nombre'=>$this->faker->streetName,
         ];
     }
 }

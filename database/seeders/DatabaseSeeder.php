@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -23,8 +24,15 @@ class DatabaseSeeder extends Seeder
             'email'=>'claudio@mail.com',
             'password'=>Hash::make('123456789'),
         ]);
+        User::create([
+            'name'=>'USER',
+            'email'=>'user@mail.com',
+            'password'=>Hash::make('123456789'),
+        ]);
         $admin->assignRole('admin');
-        \App\Models\Article::factory(40)->has(\App\Models\File::factory()->count(rand(1,4)))->create();
-        
+        \App\Models\Article::factory(40)->has(\App\Models\File::factory(2))->create();
+
+        Curso::factory(20)->create();
+
     }
 }
