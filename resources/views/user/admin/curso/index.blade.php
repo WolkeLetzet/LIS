@@ -2,23 +2,13 @@
 
 @section('admin')
     <div class="container">
-        <div class="card table-container">
-            @if (session('success'))
-                <div class="card-header ">
-
-                    <div class="row  justify-content-end">
-                        <div class="col">
-
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-
-                        </div>
-
-                    </div>
-
+        @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
                 </div>
             @endif
+        <div class="card table-container">
+
             <div class="card-body">
                 <div class="card-text overflow-auto" style="height:  450px;">
                     <table class="table">
@@ -67,11 +57,12 @@
             <div class="modal-content" id="modalContent">
 
                 <div class="modal-header">
-                    <h3 id="modalTitle">{{ $user->name }}</h3>
+                    <h3 id="modalTitle">USER</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
+                    <input type="text" style="width: 43%" class="search form-control me-2 mb-3" placeholder="Buscar"
+                        type="search" id="searchForm">
                     <div id="modalBody">
 
                     </div>
@@ -91,6 +82,7 @@
 
             let href = $(this).data('attr');
             console.log(href);
+
             $.ajax({
                 url: href,
                 method: "GET",
@@ -102,20 +94,24 @@
                 timeout: 8000
             });
 
+            $(document).on('keyup', "#searchForm", function() {
 
-        });
-        $('#search-form').keyup(function() {
-            console.log('kjjk');
-            var search = $(this).val();
-            console.log(search);
+                var search = $(this).val();
+
+                $.ajax({
+                    method: 'GET',
+                    url: href,
+                    data: {
+                        search: search
+                    },
+                    success: function(res) {
+                        $("#modalBody").html(res).show();
+                    },
+                    timeout: 8000,
+                });
 
 
-            $.get("{{ route('user.cursos.edit', $user->id) }}", {
-                search: search,
-            }, function(res) {
-                $("#modalBody").html(res);
             });
-            return;
 
         });
     </script>

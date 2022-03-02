@@ -1,14 +1,11 @@
 @extends('layouts.navbar')
 
 @section('user')
- 
-
-
     <div class="reg-container">
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <div class="card">
+                <div class="card mb-5">
                     <div class="card-header">
                         <h4 class="card-title">Informacion de Usuario</h4>
                     </div>
@@ -73,20 +70,51 @@
 
                     <div class="card-footer"></div>
                 </div>
+                @role('admin')
+                @else
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Cursos completados</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <table class="table table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Accion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (auth()->user()->cursos()->get() as $curso )
+                                    <tr>
+                                        <td>
+                                            {{$curso->title}}
+                                        </td>
+                                        <td>
+                                            {{$curso->descrip}}
+                                        </td>
+                                        <td class="text-center align-middle" >
+                                            <a href="{{ route('article.show', ['id'=>$curso->id]) }}" style="font-size:1.4rem">
+                                                <i class="icon bi bi-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endrole
+
             </div>
         </div>
 
     </div>
 
 
-<script src="{{ asset('js/myjs.js') }}"></script>
-
-
-
-
-
-
-
-
-
+    <script src="{{ asset('js/myjs.js') }}"></script>
 @endsection

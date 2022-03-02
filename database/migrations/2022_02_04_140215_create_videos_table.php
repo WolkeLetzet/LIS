@@ -17,10 +17,10 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->string('video_id')->unique();
             $table->bigInteger('article_id')->unsigned()->nullable();
-            
+
             $table->timestamps();
             $table->boolean('estado')->default(true);
-            $table->foreign('article_id')->references('id')->on('articles')->nullOnDelete();
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

@@ -1,5 +1,5 @@
 <div class="overflow-auto" style="max-height: 500px">
-    <form id="update" action="{{ route('user.roles.update', $user->name) }}" method="POST">
+    <form id="update" action="{{ route('user.roles.update', $user->id) }}" method="POST">
 
         @csrf
         @method('PUT')
@@ -17,3 +17,8 @@
 
 
 </div>
+<script>
+    $(document).ready(function(){
+        $("#modalTitle").text("{{$user->name}}")
+    })
+    </script>

@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function cursos(){
-        return $this->belongsToMany(Curso::class,'curso_user','user_id','curso_id');
+        return $this->belongsToMany(Article::class,'article_user','user_id','curso_id');
     }
 
     public function sendPasswordResetNotification($token)

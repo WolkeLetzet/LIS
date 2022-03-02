@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Video;
 use App\Models\File;
+use App\Models\User;
 use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -54,7 +55,7 @@ class ArticleController extends Controller
 
         $this->createValidator($request->all())->validate();
 
-        
+
 
 
             $article = new Article;
@@ -89,7 +90,7 @@ class ArticleController extends Controller
             }
             #return $files[0];
             return redirect(route('article.show', $article->id))->with('success', 'El articulo fue publicado con exito');
-        
+
     }
 
     private function createValidator($data)
@@ -215,7 +216,7 @@ class ArticleController extends Controller
         } catch (Exception $e) {
             return view('error.noToken')->with('message', $e->getMessage());
         }
-    
+
     }
 
     /**
@@ -239,5 +240,49 @@ class ArticleController extends Controller
         $file->estado = false;
         $file->save();
         return redirect()->back();
+    }
+
+
+
+
+
+    public function cursosIndex()
+    {
+        $users=User::available()->get();
+        $cursos=Article::available()->get();
+        return view('user.admin.curso.index',compact('users','cursos'));
+    }
+
+    public function cursoEdit($id,Request $request){
+        if($request->search){
+            return view('user.admin.curso.edit')->with('user',User::find($id))->with('cursos',Article::nameQuery($request->search)->get());
+        }
+
+
+        return view('user.admin.curso.edit')->with('user',User::find($id))->with('cursos',Article::available()->get());
+
+    }
+
+    public function cursoUpdate(Request $request,$id){
+
+        try
+        {
+            $user=User::findOrFail($id);
+            if($request->cursos)
+            {
+                $user->cursos()->detach();
+                foreach ($request->cursos as $curso){
+                    $user->cursos()->attach(Article::find($curso));
+
+                }
+            }
+        }
+        catch (Exception $e)
+        {
+            return redirect(route('user.cursos'));
+        }
+
+
+        return redirect(route('user.cursos'))->with('success','Cambios Hechos con Exito');
     }
 }

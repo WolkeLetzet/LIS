@@ -14,10 +14,6 @@ class Article extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id')->where('estado',1);
-    }
 
     public function files(){
         return $this->hasMany(File::class,'article_id','id')->where('estado',1);
@@ -37,5 +33,18 @@ class Article extends Model
     {
         return $query->where('title','LIKE', '%'.$title.'%')->where('estado',true)
                     ->orWhere('descrip','LIKE',"%$title%")->where('estado',true);
+    }
+
+    public function usuarios(){
+        return $this->belongsToMany(User::class,'article_user','curso_id','user_id');
+    }
+    public function scopeAvailable($query){
+
+        return $query->where('estado',true);
+    }
+
+    public function scopeNameQuery($query,$name){
+
+        return $query->where('estado',true)->where('title','LIKE',"%$name%");
     }
 }

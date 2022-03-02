@@ -6,8 +6,7 @@
         $i++;
     }
     ?>
-    <input type="text" style="width: 43%" class="search form-control me-2 mb-3" placeholder="Buscar" type="search"
-        id="search-form">
+
     <form id="update" action="{{ route('user.cursos.update', $user->id) }}" method="POST">
 
         @csrf
@@ -19,10 +18,15 @@
                 checked @endif
                     @endif value="{{ $curso->id }}" id="{{ $curso->id }}">
                 <label class="form-check-label" for="{{ $curso->id }}">
-                    {{ $curso->nombre }}
+                    {{ $curso->title }}
                 </label>
             </div>
         @endforeach
     </form>
 
 </div>
+<script>
+$(document).ready(function(){
+    $("#modalTitle").text("{{$user->name}}")
+})
+</script>

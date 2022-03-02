@@ -15,11 +15,7 @@ class AdminController extends Controller
 {
 
 
-    public function userRoleIndex()
-    {
-        $users=User::available()->get();
-        return view('user.admin.roles.index')->with('users',$users);
-    }
+
 
     public function userRoleEdit($id)
     {
@@ -27,21 +23,18 @@ class AdminController extends Controller
         return view('user.admin.roles.edit')->with('user',User::find($id))->with('roles',Role::get('name'));
     }
 
-    public function userRoleUpdate(Request $req)
+    public function userRoleUpdate(Request $req,$id)
     {
         $roles = $req->roles;
-        $users=User::all();
+        $user=User::find($id);
 
-        foreach($users as $user) {
-
-            if (array_key_exists($user->email,$roles)) {
-                $user->syncRoles($roles[$user->email]);
-
-            }else{
-                $user->syncRoles([]);
-            }
+        if($roles){
+            $user->syncRoles($roles);
+        }else{
+            $user->syncRoles([]);
         }
-        return redirect(route('user.roles.index'))->with('success','Cambios Hechos con Exito');
+
+        return redirect(route('user.cursos'))->with('success','Cambios Hechos con Exito');
     }
 
     public function showUserDelete()

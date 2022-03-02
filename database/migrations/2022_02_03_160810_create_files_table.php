@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->string('path')->nullable();
             $table->timestamps();
             $table->boolean('estado')->default(true);
-            $table->foreign('article_id')->references('id')->on('articles')->delete('cascade');
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

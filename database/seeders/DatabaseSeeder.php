@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+
         Role::create(['name'=>'admin']);
         $admin=User::create([
             'name'=>'Claudio',
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $admin->assignRole('admin');
         \App\Models\Article::factory(40)->has(\App\Models\File::factory(2))->create();
 
-        Curso::factory(20)->create();
+
 
     }
 }
